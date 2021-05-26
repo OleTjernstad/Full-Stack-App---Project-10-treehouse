@@ -32,6 +32,20 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 
+/**
+ * Added cors package
+ */
+const corsOptions = {
+    origin: 'http://localhost:3000/',
+    optionsSuccessStatus: 204
+};
+app.use(cors(corsOptions));
+
+/**
+ * Enable pre-flight requests
+ */
+app.options('*', cors());
+
 // setup a friendly greeting for the root route
 app.get('/', (req, res) => {
     res.json({
