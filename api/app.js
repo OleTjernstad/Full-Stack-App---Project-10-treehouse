@@ -38,7 +38,7 @@ app.use(express.json());
  * Added cors package
  */
 const corsOptions = {
-    origin: 'http://localhost:3000/',
+    origin: new RegExp('^https?://(localhost|127.0.0.1)(:[0-9]+)?$'),
     optionsSuccessStatus: 204
 };
 app.use(cors(corsOptions));
