@@ -1,11 +1,11 @@
-import { server } from './api/server';
-function App() {
-    const test = async () => {
-        console.log(await server.get());
-    };
-    test();
+import { Header } from './layout/Header';
 
-    return <div className="App"></div>;
+function App() {
+    return (
+        <div className="App">
+            <Header />
+        </div>
+    );
 }
 
 export default App;
