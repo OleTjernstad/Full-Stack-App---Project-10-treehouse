@@ -1,10 +1,20 @@
-import { Header } from './layout/Header';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+
+import { Header } from './layout/header';
+import { UserSignin } from './views/user-signIn';
 
 function App() {
     return (
-        <div className="App">
-            <Header />
-        </div>
+        <Router>
+            <div className="App">
+                <Header />
+                <Switch>
+                    <Route path="/signin">
+                        <UserSignin />
+                    </Route>
+                </Switch>
+            </div>
+        </Router>
     );
 }
 
