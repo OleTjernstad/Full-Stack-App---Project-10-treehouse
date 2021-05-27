@@ -1,3 +1,6 @@
+import './assets/css/reset.css';
+import './assets/css/global.css';
+
 import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';

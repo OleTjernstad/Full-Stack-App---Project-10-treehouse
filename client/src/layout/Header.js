@@ -1,12 +1,12 @@
 export const Header = () => {
     return (
         <header>
-            <div class="wrap header--flex">
-                <h1 class="header--logo">
+            <div className="wrap header--flex">
+                <h1 className="header--logo">
                     <a href="index.html">Courses</a>
                 </h1>
                 <nav>
-                    <ul class="header--signedin">
+                    <ul className="header--signedin">
                         <li>Welcome, Joe Smith!</li>
                         <li>
                             <a href="sign-out.html">Sign Out</a>
