@@ -1,6 +1,11 @@
 import React from 'react';
+import { useAuth } from '../hooks/useAuth';
 
 export const UserSignin = () => {
+    const { signIn } = useAuth();
+
+    const handleSignin = () => {};
+
     return (
         <main>
             <div className="form--centered">
