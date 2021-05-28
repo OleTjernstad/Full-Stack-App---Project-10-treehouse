@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 
+import { server } from '../api/server';
+
 const Context = createContext();
 
 export const useAuth = () => {
@@ -9,8 +11,19 @@ export const useAuth = () => {
 export const Provider = ({ children }) => {
     const [user, setUser] = useState();
 
-    const signIn = () => {
-        setUser();
+    const signIn = async (username, password) => {
+        const response = await server.get('api/users', {
+            auth: {
+                username,
+                password
+            }
+        });
+        if (response.status === 200) {
+            setUser(response.data.user);
+            return true;
+        }
+
+        return false;
     };
     const signOut = () => {
         setUser();

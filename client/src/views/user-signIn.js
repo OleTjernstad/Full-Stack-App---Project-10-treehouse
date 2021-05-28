@@ -1,30 +1,40 @@
-import React from 'react';
+import React, { useRef } from 'react';
+
 import { useAuth } from '../hooks/useAuth';
+import { useHistory } from 'react-router';
 
 export const UserSignin = () => {
     const { signIn } = useAuth();
+    const email = useRef();
+    const password = useRef();
+    const history = useHistory();
 
-    const handleSignin = () => {};
+    const handleSignin = async (e) => {
+        e.preventDefault();
+        if (await signIn(email.current.value, password.current.value)) {
+            history.replace('/');
+        }
+    };
 
     return (
         <main>
             <div className="form--centered">
                 <h2>Sign In</h2>
 
-                <form>
-                    <label for="emailAddress">Email Address</label>
+                <form onSubmit={handleSignin}>
+                    <label htmlFor="emailAddress">Email Address</label>
                     <input
+                        ref={email}
                         id="emailAddress"
                         name="emailAddress"
                         type="email"
-                        value=""
                     />
-                    <label for="password">Password</label>
+                    <label htmlFor="password">Password</label>
                     <input
+                        ref={password}
                         id="password"
                         name="password"
                         type="password"
-                        value=""
                     />
                     <button className="button" type="submit">
                         Sign In
