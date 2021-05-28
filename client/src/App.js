@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { Provider as AuthProvider } from './hooks/useAuth';
+import { Courses } from './views/courses';
 import { Header } from './layout/header';
 import { PrivateRoute } from './routes/privateRoute';
 import { UserSignin } from './views/user-signIn';
@@ -12,6 +13,9 @@ function App() {
                 <div className="App">
                     <Header />
                     <Switch>
+                        <Route path="/">
+                            <Courses />
+                        </Route>
                         <Route path="/signin">
                             <UserSignin />
                         </Route>
