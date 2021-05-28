@@ -26,7 +26,7 @@ export const Provider = ({ children }) => {
         return false;
     };
     const signOut = () => {
-        setUser();
+        setUser(undefined);
     };
 
     return (

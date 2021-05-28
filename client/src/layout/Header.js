@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 export const Header = () => {
@@ -16,16 +17,16 @@ export const Header = () => {
                                 Welcome, {user.firstName} {user.lastName}!
                             </li>
                             <li>
-                                <a href="sign-out.html">Sign Out</a>
+                                <Link to="/signout">Sign Out</Link>
                             </li>
                         </ul>
                     ) : (
                         <ul className="header--signedout">
                             <li>
-                                <a href="sign-up.html">Sign Up</a>
+                                <Link to="/signup">Sign Up</Link>
                             </li>
                             <li>
-                                <a href="sign-in.html">Sign In</a>
+                                <Link to="/signin">Sign In</Link>
                             </li>
                         </ul>
                     )}

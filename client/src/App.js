@@ -4,6 +4,7 @@ import { Provider as AuthProvider } from './hooks/useAuth';
 import { Courses } from './views/courses';
 import { Header } from './layout/header';
 import { PrivateRoute } from './routes/privateRoute';
+import { UserSignOut } from './views/user-sign-out';
 import { UserSignin } from './views/user-signIn';
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
                         </Route>
                         <Route path="/signin">
                             <UserSignin />
+                        </Route>
+                        <Route path="/signout">
+                            <UserSignOut />
                         </Route>
                         <PrivateRoute path="/courses">
                             <UserSignin />
