@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { Provider as AuthProvider } from './hooks/useAuth';
+import { CourseDetails } from './views/course-detail';
 import { Courses } from './views/courses';
 import { Header } from './layout/header';
 import { PrivateRoute } from './routes/privateRoute';
@@ -17,6 +18,9 @@ function App() {
                     <Switch>
                         <Route exact path="/">
                             <Courses />
+                        </Route>
+                        <Route exact path="/courses/:id">
+                            <CourseDetails />
                         </Route>
                         <Route path="/signup">
                             <UserSignUp />
