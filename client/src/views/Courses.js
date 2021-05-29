@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { Link } from 'react-router-dom';
 import { server } from '../api/server';
 
 export const Courses = () => {
@@ -20,14 +21,14 @@ export const Courses = () => {
         <main>
             <div className="wrap main--grid">
                 {courses.map((course) => (
-                    <a
-                        key={course.title}
+                    <Link
+                        key={course.id}
                         className="course--module course--link"
-                        href="course-detail.html"
+                        to={`/courses/${course.id}`}
                     >
                         <h2 className="course--label">Course</h2>
                         <h3 className="course--title">{course.title}</h3>
-                    </a>
+                    </Link>
                 ))}
                 <a
                     className="course--module course--add--module"

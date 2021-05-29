@@ -19,7 +19,7 @@ function App() {
                         <Route exact path="/">
                             <Courses />
                         </Route>
-                        <Route exact path="/courses/:id">
+                        <Route path="/courses/:id">
                             <CourseDetails />
                         </Route>
                         <Route path="/signup">
