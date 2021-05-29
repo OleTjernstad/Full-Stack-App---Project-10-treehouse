@@ -1,7 +1,7 @@
 import { Link, useHistory } from 'react-router-dom';
+import { useRef, useState } from 'react';
 
 import { server } from '../api/server';
-import { useRef } from 'react';
 
 export const UserSignUp = () => {
     const history = useHistory();
@@ -12,25 +12,42 @@ export const UserSignUp = () => {
     const password = useRef();
     const confirmPassword = useRef();
 
+    const [errors, setErrors] = useState([]);
+
     const handleSignUp = async (e) => {
         e.preventDefault();
 
         if (password.current.value === confirmPassword.current.value) {
-            const { status } = await server.post('api/users', {
-                firstName: firstName.current.value,
-                lastName: lastName.current.value,
-                emailAddress: emailAddress.current.value,
-                password: password.current.value
-            });
-            if (status === 201) {
-                history.replace('/signin');
+            try {
+                const { status } = await server.post('api/users', {
+                    firstName: firstName.current.value,
+                    lastName: lastName.current.value,
+                    emailAddress: emailAddress.current.value,
+                    password: password.current.value
+                });
+                if (status === 201) {
+                    history.replace('/signin');
+                }
+            } catch (error) {
+                if (error.response.status === 400) {
+                    setErrors(error.response.data.errors);
+                }
             }
         }
     };
+
     return (
         <main>
             <div className="form--centered">
                 <h2>Sign Up</h2>
+
+                {errors.length > 0 ? (
+                    <ul>
+                        {errors.map((error) => (
+                            <li key={error}>{error}</li>
+                        ))}
+                    </ul>
+                ) : undefined}
 
                 <form onSubmit={handleSignUp}>
                     <label htmlFor="firstName">First Name</label>
@@ -71,7 +88,12 @@ export const UserSignUp = () => {
                     <button className="button" type="submit">
                         Sign Up
                     </button>
-                    <button className="button button-secondary">Cancel</button>
+                    <button
+                        onClick={() => history.replace('/')}
+                        className="button button-secondary"
+                    >
+                        Cancel
+                    </button>
                 </form>
                 <p>
                     Already have a user account? Click here to{' '}

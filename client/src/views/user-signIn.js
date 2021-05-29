@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 
+import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useHistory } from 'react-router';
 
@@ -39,11 +40,16 @@ export const UserSignin = () => {
                     <button className="button" type="submit">
                         Sign In
                     </button>
-                    <button className="button button-secondary">Cancel</button>
+                    <button
+                        onClick={() => history.replace('/')}
+                        className="button button-secondary"
+                    >
+                        Cancel
+                    </button>
                 </form>
                 <p>
                     Don't have a user account? Click here to{' '}
-                    <a href="sign-up.html">sign up</a>!
+                    <Link to="/signup">Sign Up</Link>!
                 </p>
             </div>
         </main>
