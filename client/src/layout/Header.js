@@ -8,7 +8,7 @@ export const Header = () => {
         <header>
             <div className="wrap header--flex">
                 <h1 className="header--logo">
-                    <a href="index.html">Courses</a>
+                    <Link to="/">Courses</Link>
                 </h1>
                 <nav>
                     {user ? (
