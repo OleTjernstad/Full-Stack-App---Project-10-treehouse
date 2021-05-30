@@ -17,13 +17,16 @@ export const Provider = ({ children }) => {
             password: password
         };
 
-        const response = await server.get('api/users', {
+        const { status, data } = await server.get('api/users', {
             auth: auth
         });
 
-        if (response.status === 200) {
-            setUser(response.data.user);
-            localStorage.setItem('@course:auth', JSON.stringify(auth));
+        if (status === 200) {
+            setUser(data.user);
+            localStorage.setItem(
+                '@course:auth',
+                JSON.stringify({ ...data.user, password })
+            );
             return true;
         }
 
@@ -33,8 +36,16 @@ export const Provider = ({ children }) => {
         setUser(undefined);
     };
 
+    const loadUserFromStorage = () => {
+        const auth = JSON.parse(localStorage.getItem('@course:auth'));
+
+        setUser(auth);
+    };
+
     return (
-        <Context.Provider value={{ user, signIn, signOut }}>
+        <Context.Provider
+            value={{ user, signIn, signOut, loadUserFromStorage }}
+        >
             {children}
         </Context.Provider>
     );

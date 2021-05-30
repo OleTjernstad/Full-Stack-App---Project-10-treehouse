@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { useEffect } from 'react';
 
 export const Header = () => {
-    const { user } = useAuth();
+    const { user, loadUserFromStorage } = useAuth();
+    useEffect(() => {
+        if (!user) {
+            loadUserFromStorage();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <header>

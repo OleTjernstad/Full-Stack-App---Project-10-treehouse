@@ -9,7 +9,10 @@ server.interceptors.request.use(
         const auth = JSON.parse(localStorage.getItem('@course:auth'));
 
         if (auth) {
-            config.auth = auth;
+            config.auth = {
+                username: auth.emailAddress,
+                password: auth.password
+            };
         }
         return config;
     },
