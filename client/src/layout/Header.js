@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 export const Header = () => {
     const { user, loadUserFromStorage } = useAuth();
+
     useEffect(() => {
         if (!user) {
             loadUserFromStorage();

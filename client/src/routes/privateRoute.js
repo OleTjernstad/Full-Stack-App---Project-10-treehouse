@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 
 export const PrivateRoute = ({ children, ...props }) => {
     const { user } = useAuth();
+
     return (
         <Route
             {...props}
