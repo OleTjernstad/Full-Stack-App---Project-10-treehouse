@@ -22,7 +22,9 @@ export const CourseDetails = () => {
 
     return (
         <main>
-            <ActionBar id={course ? course.id : 0} />
+            {course ? (
+                <ActionBar id={course.id} owner={course.User} />
+            ) : undefined}
 
             <div className="wrap">
                 <h2>Course Detail</h2>

@@ -1,28 +1,41 @@
 import { Link, useHistory } from 'react-router-dom';
 
 import { server } from '../api/server';
+import { useAuth } from '../hooks/useAuth';
 
-export const ActionBar = ({ id }) => {
+export const ActionBar = ({ id, owner }) => {
+    const { user } = useAuth();
     const history = useHistory();
+
     const handleDelete = async () => {
         const { status } = await server.delete(`api/courses/${id}`);
         if (status === 204) {
             history.replace('/');
         }
     };
+
     return (
         <div className="actions--bar">
-            <div className="wrap">
-                <Link className="button" to={`/courses/${id}/update`}>
-                    Update Course
-                </Link>
-                <button className="button" onClick={handleDelete}>
-                    Delete Course
-                </button>
-                <Link className="button button-secondary" to="/">
-                    Return to List
-                </Link>
-            </div>
+            {user && user.id === owner.id ? (
+                <div className="wrap">
+                    <Link className="button" to={`/courses/${id}/update`}>
+                        Update Course
+                    </Link>
+                    <button className="button" onClick={handleDelete}>
+                        Delete Course
+                    </button>
+
+                    <Link className="button button-secondary" to="/">
+                        Return to List
+                    </Link>
+                </div>
+            ) : (
+                <div className="wrap">
+                    <Link className="button button-secondary" to="/">
+                        Return to List
+                    </Link>
+                </div>
+            )}
         </div>
     );
 };
