@@ -1,5 +1,6 @@
 import { Link, useHistory } from 'react-router-dom';
 
+import ReactMarkdown from 'react-markdown';
 import { server } from '../api/server';
 import { useAuth } from '../hooks/useAuth';
 
@@ -49,7 +50,7 @@ export const Description = ({ course: { title, User, description } }) => {
                 By {User.firstName} {User.lastName}
             </p>
 
-            {description}
+            <ReactMarkdown>{description}</ReactMarkdown>
         </div>
     );
 };
@@ -61,7 +62,9 @@ export const Detail = ({ course: { estimatedTime, materialsNeeded } }) => {
             <p>{estimatedTime}</p>
 
             <h3 className="course--detail--title">Materials Needed</h3>
-            <ul className="course--detail--list">{materialsNeeded}</ul>
+            <ul className="course--detail--list">
+                <ReactMarkdown>{materialsNeeded}</ReactMarkdown>
+            </ul>
         </div>
     );
 };
