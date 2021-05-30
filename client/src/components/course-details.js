@@ -1,10 +1,14 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
 import { server } from '../api/server';
 
 export const ActionBar = ({ id }) => {
+    const history = useHistory();
     const handleDelete = async () => {
-        const response = await server.delete(`api/courses/${id}`);
-        console.log(response);
+        const { status } = await server.delete(`api/courses/${id}`);
+        if (status === 204) {
+            history.replace('/');
+        }
     };
     return (
         <div className="actions--bar">

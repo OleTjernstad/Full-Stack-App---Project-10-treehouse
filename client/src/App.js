@@ -21,13 +21,7 @@ function App() {
                         <Route exact path="/">
                             <Courses />
                         </Route>
-                        <Route path="/courses/create">
-                            <CreateCourse />
-                        </Route>
-                        <Route path="/courses/:id/update">
-                            <UpdateCourse />
-                        </Route>
-                        <Route path="/courses/:id">
+                        <Route exact path="/courses/:id(\d+)">
                             <CourseDetails />
                         </Route>
                         <Route path="/signup">
@@ -39,8 +33,11 @@ function App() {
                         <Route path="/signout">
                             <UserSignOut />
                         </Route>
-                        <PrivateRoute path="/courses">
-                            <UserSignin />
+                        <PrivateRoute path="/courses/create">
+                            <CreateCourse />
+                        </PrivateRoute>
+                        <PrivateRoute path="/courses/:id/update">
+                            <UpdateCourse />
                         </PrivateRoute>
                     </Switch>
                 </div>
