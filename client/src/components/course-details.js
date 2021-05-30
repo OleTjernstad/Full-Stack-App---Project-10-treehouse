@@ -1,15 +1,20 @@
 import { Link } from 'react-router-dom';
+import { server } from '../api/server';
 
 export const ActionBar = ({ id }) => {
+    const handleDelete = async () => {
+        const response = await server.delete(`api/courses/${id}`);
+        console.log(response);
+    };
     return (
         <div className="actions--bar">
             <div className="wrap">
                 <Link className="button" to={`/courses/${id}/update`}>
                     Update Course
                 </Link>
-                <a className="button" href="#">
+                <button className="button" onClick={handleDelete}>
                     Delete Course
-                </a>
+                </button>
                 <Link className="button button-secondary" to="/">
                     Return to List
                 </Link>
