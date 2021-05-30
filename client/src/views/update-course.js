@@ -2,6 +2,7 @@ import { CourseForm, initialState, reducer } from '../components/course-form';
 import { useEffect, useReducer } from 'react';
 import { useHistory, useParams } from 'react-router';
 
+import { Link } from 'react-router-dom';
 import { server } from '../api/server';
 
 export const UpdateCourse = () => {
@@ -37,7 +38,12 @@ export const UpdateCourse = () => {
                     <button className="button" type="submit">
                         Update Course
                     </button>
-                    <button className="button button-secondary">Cancel</button>
+                    <Link
+                        className="button button-secondary"
+                        to={`/courses/${id}`}
+                    >
+                        Cancel
+                    </Link>
                 </form>
             </div>
         </main>
