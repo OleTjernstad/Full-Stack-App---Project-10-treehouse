@@ -24,7 +24,7 @@ router.get(
             include: [
                 {
                     model: User,
-                    attributes: ['firstName', 'lastName', 'emailAddress']
+                    attributes: ['id', 'firstName', 'lastName', 'emailAddress']
                 }
             ]
         });
@@ -49,7 +49,7 @@ router.get(
             include: [
                 {
                     model: User,
-                    attributes: ['firstName', 'lastName', 'emailAddress']
+                    attributes: ['id', 'firstName', 'lastName', 'emailAddress']
                 }
             ]
         });
