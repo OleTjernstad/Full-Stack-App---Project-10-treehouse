@@ -42,11 +42,14 @@ export const UserSignUp = () => {
                 <h2>Sign Up</h2>
 
                 {errors.length > 0 ? (
-                    <ul>
-                        {errors.map((error) => (
-                            <li key={error}>{error}</li>
-                        ))}
-                    </ul>
+                    <div className="validation--errors">
+                        <h3>Validation Errors</h3>
+                        <ul>
+                            {errors.map((error) => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    </div>
                 ) : undefined}
 
                 <form onSubmit={handleSignUp}>

@@ -1,5 +1,5 @@
 import { CourseForm, initialState, reducer } from '../components/course-form';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 
 import { Link } from 'react-router-dom';
@@ -9,6 +9,8 @@ export const UpdateCourse = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const history = useHistory();
     const { id } = useParams();
+
+    const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         const get = async () => {
@@ -22,17 +24,34 @@ export const UpdateCourse = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { status } = await server.put(`/api/courses/${id}`, {
-            ...state
-        });
-        if (status === 204) {
-            history.replace('/');
+        try {
+            const { status } = await server.put(`/api/courses/${id}`, {
+                ...state
+            });
+            if (status === 204) {
+                history.replace('/');
+            }
+        } catch (error) {
+            if (error.response.status === 400) {
+                setErrors(error.response.data.errors);
+            }
         }
     };
+
     return (
         <main>
             <div className="wrap">
                 <h2>Update Course</h2>
+                {errors.length > 0 ? (
+                    <div className="validation--errors">
+                        <h3>Validation Errors</h3>
+                        <ul>
+                            {errors.map((error) => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ) : undefined}
                 <form onSubmit={handleSubmit}>
                     <CourseForm course={state} dispatch={dispatch} />
                     <button className="button" type="submit">
