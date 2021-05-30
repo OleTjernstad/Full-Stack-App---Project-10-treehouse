@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Provider as AuthProvider } from './hooks/useAuth';
 import { CourseDetails } from './views/course-detail';
 import { Courses } from './views/courses';
+import { CreateCourse } from './views/create-course';
 import { Header } from './layout/header';
 import { PrivateRoute } from './routes/privateRoute';
 import { UserSignOut } from './views/user-sign-out';
@@ -18,6 +19,9 @@ function App() {
                     <Switch>
                         <Route exact path="/">
                             <Courses />
+                        </Route>
+                        <Route path="/courses/create">
+                            <CreateCourse />
                         </Route>
                         <Route path="/courses/:id">
                             <CourseDetails />
