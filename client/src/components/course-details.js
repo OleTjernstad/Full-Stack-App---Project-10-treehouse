@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export const ActionBar = () => {
     return (
         <div className="actions--bar">
@@ -8,9 +10,9 @@ export const ActionBar = () => {
                 <a className="button" href="#">
                     Delete Course
                 </a>
-                <a className="button button-secondary" href="index.html">
+                <Link className="button button-secondary" to="/">
                     Return to List
-                </a>
+                </Link>
             </div>
         </div>
     );
