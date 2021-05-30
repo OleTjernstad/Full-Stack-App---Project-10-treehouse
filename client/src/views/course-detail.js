@@ -22,7 +22,7 @@ export const CourseDetails = () => {
 
     return (
         <main>
-            <ActionBar />
+            <ActionBar id={course ? course.id : 0} />
 
             <div className="wrap">
                 <h2>Course Detail</h2>

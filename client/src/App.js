@@ -6,6 +6,7 @@ import { Courses } from './views/courses';
 import { CreateCourse } from './views/create-course';
 import { Header } from './layout/header';
 import { PrivateRoute } from './routes/privateRoute';
+import { UpdateCourse } from './views/update-course';
 import { UserSignOut } from './views/user-sign-out';
 import { UserSignUp } from './views/user-sign-up';
 import { UserSignin } from './views/user-signIn';
@@ -22,6 +23,9 @@ function App() {
                         </Route>
                         <Route path="/courses/create">
                             <CreateCourse />
+                        </Route>
+                        <Route path="/courses/:id/update">
+                            <UpdateCourse />
                         </Route>
                         <Route path="/courses/:id">
                             <CourseDetails />

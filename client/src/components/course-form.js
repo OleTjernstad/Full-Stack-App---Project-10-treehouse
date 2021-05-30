@@ -86,8 +86,8 @@ export const reducer = (state, action) => {
             return { ...state, estimatedTime: action.payload };
         case 'SetMaterialsNeeded':
             return { ...state, materialsNeeded: action.payload };
-        case 'setUser':
-            return { ...state, User: action.payload };
+        case 'setCourse':
+            return action.payload;
         default:
             throw new Error();
     }

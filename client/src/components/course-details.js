@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 
-export const ActionBar = () => {
+export const ActionBar = ({ id }) => {
     return (
         <div className="actions--bar">
             <div className="wrap">
-                <a className="button" href="update-course.html">
+                <Link className="button" to={`/courses/${id}/update`}>
                     Update Course
-                </a>
+                </Link>
                 <a className="button" href="#">
                     Delete Course
                 </a>
