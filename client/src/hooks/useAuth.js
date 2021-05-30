@@ -11,15 +11,19 @@ export const useAuth = () => {
 export const Provider = ({ children }) => {
     const [user, setUser] = useState();
 
-    const signIn = async (username, password) => {
+    const signIn = async (emailAddress, password) => {
+        const auth = {
+            username: emailAddress,
+            password: password
+        };
+
         const response = await server.get('api/users', {
-            auth: {
-                username,
-                password
-            }
+            auth: auth
         });
+
         if (response.status === 200) {
             setUser(response.data.user);
+            localStorage.setItem('@course:auth', JSON.stringify(auth));
             return true;
         }
 
