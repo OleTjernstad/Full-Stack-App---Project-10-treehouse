@@ -1,23 +1,31 @@
 import { ActionBar, Description, Detail } from '../components/course-details';
 import { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
 
 import { server } from '../api/server';
-import { useParams } from 'react-router';
 
 export const CourseDetails = () => {
     const { id } = useParams();
-
+    const history = useHistory();
     const [course, setCourse] = useState();
 
     useEffect(() => {
         const get = async () => {
-            const { status, data } = await server.get(`api/courses/${id}`);
-            if (status === 200) {
-                setCourse(data.course);
-                console.log(data.course);
+            try {
+                const { status, data } = await server.get(`api/courses/${id}`);
+                if (status === 200) {
+                    setCourse(data.course);
+                    console.log(data.course);
+                }
+            } catch (error) {
+                if (error.response.status === 404) {
+                    history.push('/notfound');
+                } else {
+                }
             }
         };
         get();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     return (

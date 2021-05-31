@@ -14,12 +14,20 @@ export const UpdateCourse = () => {
 
     useEffect(() => {
         const get = async () => {
-            const { status, data } = await server.get(`api/courses/${id}`);
-            if (status === 200) {
-                dispatch({ type: 'setCourse', payload: data.course });
+            try {
+                const { status, data } = await server.get(`api/courses/${id}`);
+                if (status === 200) {
+                    dispatch({ type: 'setCourse', payload: data.course });
+                }
+            } catch (error) {
+                if (error.response.status === 404) {
+                    history.push('/notfound');
+                } else {
+                }
             }
         };
         get();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     const handleSubmit = async (e) => {

@@ -1,10 +1,16 @@
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import {
+    Redirect,
+    Route,
+    BrowserRouter as Router,
+    Switch
+} from 'react-router-dom';
 
 import { Provider as AuthProvider } from './hooks/useAuth';
 import { CourseDetails } from './views/course-detail';
 import { Courses } from './views/courses';
 import { CreateCourse } from './views/create-course';
 import { Header } from './layout/header';
+import { NotFound } from './views/not-found';
 import { PrivateRoute } from './routes/privateRoute';
 import { UpdateCourse } from './views/update-course';
 import { UserSignOut } from './views/user-sign-out';
@@ -33,12 +39,18 @@ function App() {
                         <Route path="/signout">
                             <UserSignOut />
                         </Route>
+                        <Route path="/notfound">
+                            <NotFound />
+                        </Route>
                         <PrivateRoute path="/courses/create">
                             <CreateCourse />
                         </PrivateRoute>
                         <PrivateRoute path="/courses/:id/update">
                             <UpdateCourse />
                         </PrivateRoute>
+                        <Route>
+                            <Redirect to="/notfound" />
+                        </Route>
                     </Switch>
                 </div>
             </Router>
