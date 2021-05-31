@@ -17,14 +17,11 @@ import { UpdateCourse } from './views/update-course';
 import { UserSignOut } from './views/user-sign-out';
 import { UserSignUp } from './views/user-sign-up';
 import { UserSignin } from './views/user-signIn';
-import { createBrowserHistory } from 'history';
-
-export const history = createBrowserHistory();
 
 function App() {
     return (
         <AuthProvider>
-            <Router history={history}>
+            <Router>
                 <div className="App">
                     <Header />
                     <Switch>

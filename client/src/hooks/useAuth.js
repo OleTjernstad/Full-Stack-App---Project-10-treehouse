@@ -16,7 +16,7 @@ export const Provider = ({ children }) => {
             username: emailAddress,
             password: password
         };
-
+        console.log(auth, 'useAuth signin');
         const { status, data } = await server.get('api/users', {
             auth: auth
         });
@@ -25,7 +25,7 @@ export const Provider = ({ children }) => {
             setUser(data.user);
             localStorage.setItem(
                 '@course:auth',
-                JSON.stringify({ ...data.user, password })
+                JSON.stringify({ ...data.user, password: password })
             );
             return true;
         }

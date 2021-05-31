@@ -1,7 +1,8 @@
 import { Link, useHistory } from 'react-router-dom';
-import { useRef, useState } from 'react';
 
 import { server } from '../api/server';
+import { useErrorHandler } from '../hooks/use-error-handler';
+import { useRef } from 'react';
 
 export const UserSignUp = () => {
     const history = useHistory();
@@ -12,7 +13,7 @@ export const UserSignUp = () => {
     const password = useRef();
     const confirmPassword = useRef();
 
-    const [errors, setErrors] = useState([]);
+    const { errors, handler } = useErrorHandler();
 
     const handleSignUp = async (e) => {
         e.preventDefault();
@@ -29,9 +30,7 @@ export const UserSignUp = () => {
                     history.replace('/signin');
                 }
             } catch (error) {
-                if (error.response.status === 400) {
-                    setErrors(error.response.data.errors);
-                }
+                handler(error);
             }
         }
     };

@@ -2,20 +2,27 @@ import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { server } from '../api/server';
+import { useErrorHandler } from '../hooks/use-error-handler';
 
 export const Courses = () => {
     const [courses, setCourses] = useState([]);
+    const { handler } = useErrorHandler();
 
     const loadCourses = async () => {
-        const { data, status } = await server.get('api/courses');
+        try {
+            const { data, status } = await server.get('api/courses');
 
-        if (status === 200) {
-            setCourses(data.courses);
+            if (status === 200) {
+                setCourses(data.courses);
+            }
+        } catch (error) {
+            handler(error);
         }
     };
 
     useEffect(() => {
         loadCourses();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <main>

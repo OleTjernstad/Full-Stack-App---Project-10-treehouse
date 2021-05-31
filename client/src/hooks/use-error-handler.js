@@ -21,10 +21,5 @@ export const useErrorHandler = () => {
         }
     };
 
-    const resetErrors = () => {
-        console.log('cleanup errors');
-        setErrors([]);
-    };
-
-    return { handler, resetErrors, errors };
+    return { handler, errors };
 };

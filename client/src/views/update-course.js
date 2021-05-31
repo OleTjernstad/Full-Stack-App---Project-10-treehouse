@@ -4,13 +4,14 @@ import { useHistory, useParams } from 'react-router';
 
 import { Link } from 'react-router-dom';
 import { server } from '../api/server';
+import { useErrorHandler } from '../hooks/use-error-handler';
 
 export const UpdateCourse = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const history = useHistory();
     const { id } = useParams();
 
-    const [errors, setErrors] = useState([]);
+    const { errors, handler } = useErrorHandler();
 
     useEffect(() => {
         const get = async () => {
@@ -20,10 +21,7 @@ export const UpdateCourse = () => {
                     dispatch({ type: 'setCourse', payload: data.course });
                 }
             } catch (error) {
-                if (error.response.status === 404) {
-                    history.push('/notfound');
-                } else {
-                }
+                handler(error);
             }
         };
         get();
@@ -40,9 +38,7 @@ export const UpdateCourse = () => {
                 history.replace('/');
             }
         } catch (error) {
-            if (error.response.status === 400) {
-                setErrors(error.response.data.errors);
-            }
+            handler(error);
         }
     };
 

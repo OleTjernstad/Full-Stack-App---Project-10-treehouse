@@ -11,7 +11,7 @@ export const CreateCourse = () => {
 
     const history = useHistory();
     const { user } = useAuth();
-    const { errors, handler, resetErrors } = useErrorHandler();
+    const { errors, handler } = useErrorHandler();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,18 +21,12 @@ export const CreateCourse = () => {
                 userId: user.id
             });
             if (status === 201) {
-                resetErrors();
                 history.replace('/');
             }
         } catch (error) {
             handler(error);
         }
     };
-    useEffect(() => {
-        return () => {
-            resetErrors();
-        };
-    });
 
     return (
         <main>
