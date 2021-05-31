@@ -12,6 +12,9 @@ export const useErrorHandler = () => {
             case 401:
                 history.replace('/signin');
                 break;
+            case 403:
+                history.replace('/forbidden');
+                break;
             case 404:
                 history.replace('/notfound');
                 break;
