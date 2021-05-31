@@ -1,17 +1,17 @@
 import { CourseForm, initialState, reducer } from '../components/course-form';
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 
 import { server } from '../api/server';
 import { useAuth } from '../hooks/useAuth';
+import { useErrorHandler } from '../hooks/use-error-handler';
 import { useHistory } from 'react-router-dom';
 
 export const CreateCourse = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
-    const [errors, setErrors] = useState([]);
-
     const history = useHistory();
     const { user } = useAuth();
+    const { errors, handler, resetErrors } = useErrorHandler();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,14 +21,18 @@ export const CreateCourse = () => {
                 userId: user.id
             });
             if (status === 201) {
+                resetErrors();
                 history.replace('/');
             }
         } catch (error) {
-            if (error.response.status === 400) {
-                setErrors(error.response.data.errors);
-            }
+            handler(error);
         }
     };
+    useEffect(() => {
+        return () => {
+            resetErrors();
+        };
+    });
 
     return (
         <main>
