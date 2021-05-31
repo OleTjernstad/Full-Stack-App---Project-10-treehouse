@@ -4,12 +4,15 @@ import { useHistory, useParams } from 'react-router';
 
 import { Link } from 'react-router-dom';
 import { server } from '../api/server';
+import { useAuth } from '../hooks/useAuth';
 import { useErrorHandler } from '../hooks/use-error-handler';
 
 export const UpdateCourse = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const history = useHistory();
     const { id } = useParams();
+
+    const { user } = useAuth();
 
     const { errors, handler } = useErrorHandler();
 
@@ -18,6 +21,9 @@ export const UpdateCourse = () => {
             try {
                 const { status, data } = await server.get(`api/courses/${id}`);
                 if (status === 200) {
+                    if (user.id !== data.course.User.id) {
+                        history.replace('forbidden');
+                    }
                     dispatch({ type: 'setCourse', payload: data.course });
                 }
             } catch (error) {

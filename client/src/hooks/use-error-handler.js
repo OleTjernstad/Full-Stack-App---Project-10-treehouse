@@ -1,9 +1,10 @@
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
 export const useErrorHandler = () => {
     const [errors, setErrors] = useState([]);
     const history = useHistory();
+    console.log(history);
     const handler = (error) => {
         switch (error.response.status) {
             case 400:
@@ -20,6 +21,7 @@ export const useErrorHandler = () => {
                 break;
 
             default:
+                history.replace('/error');
                 break;
         }
     };

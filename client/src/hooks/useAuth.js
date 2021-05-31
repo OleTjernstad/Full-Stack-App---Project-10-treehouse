@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from 'react';
 
 import { server } from '../api/server';
+import { useErrorHandler } from './use-error-handler';
 
 const Context = createContext();
 
@@ -10,24 +11,29 @@ export const useAuth = () => {
 
 export const Provider = ({ children }) => {
     const [user, setUser] = useState();
+    const { handler } = useErrorHandler();
 
     const signIn = async (emailAddress, password) => {
         const auth = {
             username: emailAddress,
             password: password
         };
-        console.log(auth, 'useAuth signin');
-        const { status, data } = await server.get('api/users', {
-            auth: auth
-        });
 
-        if (status === 200) {
-            setUser(data.user);
-            localStorage.setItem(
-                '@course:auth',
-                JSON.stringify({ ...data.user, password: password })
-            );
-            return true;
+        try {
+            const { status, data } = await server.get('api/users', {
+                auth: auth
+            });
+
+            if (status === 200) {
+                setUser(data.user);
+                localStorage.setItem(
+                    '@course:auth',
+                    JSON.stringify({ ...data.user, password: password })
+                );
+                return true;
+            }
+        } catch (error) {
+            handler(error);
         }
 
         return false;

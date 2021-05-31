@@ -13,7 +13,7 @@ router.get(
         const user = await User.findByPk(req.currentUser.id, {
             attributes: ['id', 'firstName', 'lastName', 'emailAddress']
         });
-
+        res.status(500).end();
         res.json({ user });
     })
 );

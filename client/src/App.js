@@ -13,6 +13,7 @@ import { Forbidden } from './views/forbidden';
 import { Header } from './layout/header';
 import { NotFound } from './views/not-found';
 import { PrivateRoute } from './routes/privateRoute';
+import { UnhandledError } from './views/unhandled-error';
 import { UpdateCourse } from './views/update-course';
 import { UserSignOut } from './views/user-sign-out';
 import { UserSignUp } from './views/user-sign-up';
@@ -56,6 +57,9 @@ function App() {
                         </Route>
                         <Route path="/notfound">
                             <NotFound />
+                        </Route>
+                        <Route path="/error">
+                            <UnhandledError />
                         </Route>
                         <Route>
                             <Redirect to="/notfound" />
