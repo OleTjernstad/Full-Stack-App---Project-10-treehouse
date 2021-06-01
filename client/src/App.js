@@ -21,8 +21,8 @@ import { UserSignin } from './views/user-signIn';
 
 function App() {
     return (
-        <AuthProvider>
-            <Router>
+        <Router>
+            <AuthProvider>
                 <div className="App">
                     <Header />
                     <Switch>
@@ -66,8 +66,8 @@ function App() {
                         </Route>
                     </Switch>
                 </div>
-            </Router>
-        </AuthProvider>
+            </AuthProvider>
+        </Router>
     );
 }
 
