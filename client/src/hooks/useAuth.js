@@ -40,6 +40,7 @@ export const Provider = ({ children }) => {
     };
     const signOut = () => {
         setUser(undefined);
+        localStorage.removeItem('@course:auth');
     };
 
     const loadUserFromStorage = () => {
