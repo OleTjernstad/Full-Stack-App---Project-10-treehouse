@@ -1,3 +1,7 @@
+/**
+ * render Forbidden page
+ * @returns
+ */
 export const Forbidden = () => {
     return (
         <main>

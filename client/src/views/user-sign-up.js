@@ -4,9 +4,16 @@ import { server } from '../api/server';
 import { useErrorHandler } from '../hooks/use-error-handler';
 import { useRef } from 'react';
 
+/**
+ * Render User signup page
+ * @returns
+ */
 export const UserSignUp = () => {
     const history = useHistory();
 
+    /**
+     * Refs for handling input data
+     */
     const firstName = useRef();
     const lastName = useRef();
     const emailAddress = useRef();
@@ -15,6 +22,10 @@ export const UserSignUp = () => {
 
     const { errors, handler } = useErrorHandler();
 
+    /**
+     * Submit user data to the api
+     * @param {Event} e Submit event
+     */
     const handleSignUp = async (e) => {
         e.preventDefault();
 

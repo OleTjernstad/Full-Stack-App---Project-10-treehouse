@@ -1,3 +1,7 @@
+/**
+ * Render not found page
+ * @returns
+ */
 export const NotFound = () => {
     return (
         <main>

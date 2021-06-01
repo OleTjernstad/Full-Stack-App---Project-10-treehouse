@@ -1,3 +1,7 @@
+/**
+ * Render Unhandled error page
+ * @returns
+ */
 export const UnhandledError = () => {
     return (
         <main>

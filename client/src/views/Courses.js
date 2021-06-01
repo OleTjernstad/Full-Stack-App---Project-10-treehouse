@@ -4,26 +4,33 @@ import { Link } from 'react-router-dom';
 import { server } from '../api/server';
 import { useErrorHandler } from '../hooks/use-error-handler';
 
+/**
+ * Render course list and create course button
+ * @returns
+ */
 export const Courses = () => {
     const [courses, setCourses] = useState([]);
     const { handler } = useErrorHandler();
 
-    const loadCourses = async () => {
-        try {
-            const { data, status } = await server.get('api/courses');
-
-            if (status === 200) {
-                setCourses(data.courses);
-            }
-        } catch (error) {
-            handler(error);
-        }
-    };
-
+    /**
+     * load all courses from api
+     */
     useEffect(() => {
-        loadCourses();
+        const get = async () => {
+            try {
+                const { data, status } = await server.get('api/courses');
+
+                if (status === 200) {
+                    setCourses(data.courses);
+                }
+            } catch (error) {
+                handler(error);
+            }
+        };
+        get();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
     return (
         <main>
             <div className="wrap main--grid">

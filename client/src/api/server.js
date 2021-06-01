@@ -1,9 +1,15 @@
 import axios from 'axios';
 
+/**
+ * Create a axios instance
+ */
 export const server = axios.create({
     baseURL: process.env.REACT_APP_BASE_API_URL
 });
 
+/**
+ * axios interceptor to att auth to every request if user is signed in
+ */
 server.interceptors.request.use(
     async (config) => {
         const auth = JSON.parse(localStorage.getItem('@course:auth'));

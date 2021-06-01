@@ -5,12 +5,19 @@ import { server } from '../api/server';
 import { useErrorHandler } from '../hooks/use-error-handler';
 import { useParams } from 'react-router';
 
+/**
+ * Render page with course details
+ * @returns
+ */
 export const CourseDetails = () => {
     const { id } = useParams();
     const [course, setCourse] = useState();
 
     const { handler } = useErrorHandler();
 
+    /**
+     * Load course by id from api
+     */
     useEffect(() => {
         const get = async () => {
             try {

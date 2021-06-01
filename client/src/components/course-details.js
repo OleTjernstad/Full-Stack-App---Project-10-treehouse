@@ -2,8 +2,14 @@ import { Link, useHistory } from 'react-router-dom';
 
 import ReactMarkdown from 'react-markdown';
 import { server } from '../api/server';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/use-auth';
 
+/**
+ * Render action buttons for course filter buttons based on owner
+ *
+ * @param {props} id: Course id, owner: course User object
+ * @returns
+ */
 export const ActionBar = ({ id, owner }) => {
     const { user } = useAuth();
     const history = useHistory();
@@ -41,6 +47,12 @@ export const ActionBar = ({ id, owner }) => {
     );
 };
 
+/**
+ * Render the description and title of the course, add markdown to description
+ *
+ * @param {props} course The course object
+ * @returns
+ */
 export const Description = ({ course: { title, User, description } }) => {
     return (
         <div>
@@ -55,6 +67,11 @@ export const Description = ({ course: { title, User, description } }) => {
     );
 };
 
+/**
+ * Render the details part of the course, Add markdown to materiels
+ * @param {props} course The Course object
+ * @returns
+ */
 export const Detail = ({ course: { estimatedTime, materialsNeeded } }) => {
     return (
         <div>

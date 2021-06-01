@@ -1,10 +1,18 @@
 import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
+/**
+ * Hook for handling error codes from the api, set errors or redirect to the correct error path
+ * @returns {handler, errors}
+ */
 export const useErrorHandler = () => {
     const [errors, setErrors] = useState([]);
     const history = useHistory();
 
+    /**
+     * check error status and act based on it
+     * @param {object} error the error object from the response
+     */
     const handler = (error) => {
         switch (error.response.status) {
             case 400:

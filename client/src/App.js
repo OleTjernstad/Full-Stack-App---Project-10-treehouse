@@ -19,6 +19,10 @@ import { UserSignOut } from './views/user-sign-out';
 import { UserSignUp } from './views/user-sign-up';
 import { UserSignin } from './views/user-signIn';
 
+/**
+ * Render app and routes
+ * @returns
+ */
 function App() {
     return (
         <Router>

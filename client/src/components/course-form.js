@@ -1,3 +1,8 @@
+/**
+ * Render the course form for create and update the course
+ * @param {props} course The course object, dispatch: the function to set state
+ * @returns
+ */
 export const CourseForm = ({
     course: { title, User, description, estimatedTime, materialsNeeded },
     dispatch
@@ -65,6 +70,9 @@ export const CourseForm = ({
     );
 };
 
+/**
+ * The initial state for the useReducer
+ */
 export const initialState = {
     id: 0,
     title: '',
@@ -74,6 +82,13 @@ export const initialState = {
     User: {}
 };
 
+/**
+ * The reducer function to set the course state
+ *
+ * @param {object} state the object containing the state
+ * @param {object} action type and payload to run correct setState
+ * @returns state
+ */
 export const reducer = (state, action) => {
     switch (action.type) {
         case 'setId':

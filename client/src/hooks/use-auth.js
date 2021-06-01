@@ -5,14 +5,31 @@ import { useErrorHandler } from './use-error-handler';
 
 const Context = createContext();
 
+/**
+ * UseAuth context
+ * @returns context
+ */
 export const useAuth = () => {
     return useContext(Context);
 };
 
+/**
+ * The context provider with functions and global state
+ *
+ * @param {props} children
+ * @returns
+ */
 export const Provider = ({ children }) => {
     const [user, setUser] = useState();
     const { handler } = useErrorHandler();
 
+    /**
+     * Log in the user and persist the user to local state
+     *
+     * @param {string} emailAddress users email
+     * @param {string} password users password
+     * @returns
+     */
     const signIn = async (emailAddress, password) => {
         const auth = {
             username: emailAddress,
@@ -38,11 +55,18 @@ export const Provider = ({ children }) => {
 
         return false;
     };
+
+    /**
+     * Set user state to undefined and remove the persisted user from local storage
+     */
     const signOut = () => {
         setUser(undefined);
         localStorage.removeItem('@course:auth');
     };
 
+    /**
+     * load user from local storage to state
+     */
     const loadUserFromStorage = () => {
         const auth = JSON.parse(localStorage.getItem('@course:auth'));
 

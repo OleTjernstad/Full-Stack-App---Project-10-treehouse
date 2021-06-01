@@ -2,10 +2,14 @@ import { CourseForm, initialState, reducer } from '../components/course-form';
 import { Link, useHistory } from 'react-router-dom';
 
 import { server } from '../api/server';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/use-auth';
 import { useErrorHandler } from '../hooks/use-error-handler';
 import { useReducer } from 'react';
 
+/**
+ * Render create course page
+ * @returns
+ */
 export const CreateCourse = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -13,6 +17,11 @@ export const CreateCourse = () => {
     const { user } = useAuth();
     const { errors, handler } = useErrorHandler();
 
+    /**
+     * Submit the form to the api
+     *
+     * @param {Event} e submit event
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

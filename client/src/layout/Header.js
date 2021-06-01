@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { useEffect } from 'react';
 
+/**
+ * Render the Page header, Show header buttons based on logged in status, call loadUserFromStorage on reload
+ *
+ * @returns
+ */
 export const Header = () => {
     const { user, loadUserFromStorage } = useAuth();
 

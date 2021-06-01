@@ -4,9 +4,14 @@ import { useHistory, useParams } from 'react-router';
 
 import { Link } from 'react-router-dom';
 import { server } from '../api/server';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/use-auth';
 import { useErrorHandler } from '../hooks/use-error-handler';
 
+/**
+ * Render Update course page
+ *
+ * @returns
+ */
 export const UpdateCourse = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const history = useHistory();
@@ -16,6 +21,9 @@ export const UpdateCourse = () => {
 
     const { errors, handler } = useErrorHandler();
 
+    /**
+     * Load course details by id from api
+     */
     useEffect(() => {
         const get = async () => {
             try {
@@ -34,6 +42,10 @@ export const UpdateCourse = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
+    /**
+     * Submit the updated course to the api
+     * @param {Event} e Submit event
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {

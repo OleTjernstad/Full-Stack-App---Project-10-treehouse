@@ -2,8 +2,12 @@ import React, { useRef } from 'react';
 import { useHistory, useLocation } from 'react-router';
 
 import { Link } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/use-auth';
 
+/**
+ * Render sign in page
+ * @returns
+ */
 export const UserSignin = () => {
     const { signIn } = useAuth();
     const email = useRef();
@@ -11,6 +15,11 @@ export const UserSignin = () => {
     const history = useHistory();
     const location = useLocation();
 
+    /**
+     * Submit sign in data to the api
+     *
+     * @param {Event} e Submit event
+     */
     const handleSignin = async (e) => {
         e.preventDefault();
         const { from } = location.state || { from: { pathname: '/' } };
