@@ -1,10 +1,10 @@
 import { CourseForm, initialState, reducer } from '../components/course-form';
-import { useEffect, useReducer, useState } from 'react';
 
 import { server } from '../api/server';
 import { useAuth } from '../hooks/useAuth';
 import { useErrorHandler } from '../hooks/use-error-handler';
 import { useHistory } from 'react-router-dom';
+import { useReducer } from 'react';
 
 export const CreateCourse = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
