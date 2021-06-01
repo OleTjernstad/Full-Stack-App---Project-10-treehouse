@@ -41,7 +41,7 @@ export const UpdateCourse = () => {
                 ...state
             });
             if (status === 204) {
-                history.replace('/');
+                history.replace(`/courses/${id}`);
             }
         } catch (error) {
             handler(error);
