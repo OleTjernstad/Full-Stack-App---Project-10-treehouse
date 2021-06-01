@@ -1,9 +1,9 @@
 import { CourseForm, initialState, reducer } from '../components/course-form';
+import { Link, useHistory } from 'react-router-dom';
 
 import { server } from '../api/server';
 import { useAuth } from '../hooks/useAuth';
 import { useErrorHandler } from '../hooks/use-error-handler';
-import { useHistory } from 'react-router-dom';
 import { useReducer } from 'react';
 
 export const CreateCourse = () => {
