@@ -5,7 +5,7 @@ import {
     Switch
 } from 'react-router-dom';
 
-import { Provider as AuthProvider } from './hooks/useAuth';
+import { Provider as AuthProvider } from './hooks/use-auth';
 import { CourseDetails } from './views/course-detail';
 import { Courses } from './views/courses';
 import { CreateCourse } from './views/create-course';
