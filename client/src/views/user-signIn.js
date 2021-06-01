@@ -1,19 +1,21 @@
 import React, { useRef } from 'react';
+import { useHistory, useLocation } from 'react-router';
 
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { useHistory } from 'react-router';
 
 export const UserSignin = () => {
     const { signIn } = useAuth();
     const email = useRef();
     const password = useRef();
     const history = useHistory();
+    const location = useLocation();
 
     const handleSignin = async (e) => {
         e.preventDefault();
+        const { from } = location.state || { from: { pathname: '/' } };
         if (await signIn(email.current.value, password.current.value)) {
-            history.replace('/');
+            history.replace(from);
         }
     };
 
