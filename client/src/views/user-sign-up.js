@@ -90,12 +90,9 @@ export const UserSignUp = () => {
                     <button className="button" type="submit">
                         Sign Up
                     </button>
-                    <button
-                        onClick={() => history.replace('/')}
-                        className="button button-secondary"
-                    >
+                    <Link className="button button-secondary" to="/">
                         Cancel
-                    </button>
+                    </Link>
                 </form>
                 <p>
                     Already have a user account? Click here to{' '}

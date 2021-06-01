@@ -40,12 +40,9 @@ export const UserSignin = () => {
                     <button className="button" type="submit">
                         Sign In
                     </button>
-                    <button
-                        onClick={() => history.replace('/')}
-                        className="button button-secondary"
-                    >
+                    <Link className="button button-secondary" to="/">
                         Cancel
-                    </button>
+                    </Link>
                 </form>
                 <p>
                     Don't have a user account? Click here to{' '}

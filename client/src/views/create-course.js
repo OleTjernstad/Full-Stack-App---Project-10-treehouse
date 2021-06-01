@@ -48,7 +48,9 @@ export const CreateCourse = () => {
                     <button className="button" type="submit">
                         Create Course
                     </button>
-                    <button className="button button-secondary">Cancel</button>
+                    <Link className="button button-secondary" to="/">
+                        Cancel
+                    </Link>
                 </form>
             </div>
         </main>
