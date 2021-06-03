@@ -1,8 +1,8 @@
 import { CourseForm, initialState, reducer } from '../components/course-form';
+import { getCourseById, server } from '../api/server';
 import { useHistory, useParams } from 'react-router';
 
 import { Link } from 'react-router-dom';
-import { server } from '../api/server';
 import { useAsyncLoader } from '../hooks/use-async-loader';
 import { useAuth } from '../hooks/use-auth';
 import { useErrorHandler } from '../hooks/use-error-handler';
@@ -15,6 +15,7 @@ import { useReducer } from 'react';
  */
 export const UpdateCourse = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
+
     const history = useHistory();
     const { id } = useParams();
 
@@ -25,12 +26,16 @@ export const UpdateCourse = () => {
     /**
      * Load course details by id from api
      */
-    useAsyncLoader(id, server.get(`api/courses/${id}`), (data, status) => {
+    useAsyncLoader(getCourseById(id), (data, status) => {
         if (status === 200) {
             if (user.id !== data.course.User.id) {
-                history.replace('forbidden');
+                history.replace('/forbidden');
+                return;
             }
-            dispatch({ type: 'setCourse', payload: data.course });
+            dispatch({
+                type: 'setCourse',
+                payload: data.course
+            });
         }
     });
 

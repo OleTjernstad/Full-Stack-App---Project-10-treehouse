@@ -25,3 +25,19 @@ server.interceptors.request.use(
         return Promise.reject(err);
     }
 );
+
+/**
+ * Api url for all courses
+ * @returns string
+ */
+export const getAllCourses = () => {
+    return 'api/courses';
+};
+
+/**
+ * api url for getting course by id
+ * @returns string
+ */
+export const getCourseById = (id) => {
+    return `api/courses/${id}`;
+};

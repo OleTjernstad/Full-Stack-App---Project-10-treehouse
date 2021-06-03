@@ -9,23 +9,27 @@ import { useAuth } from '../hooks/use-auth';
  * @returns
  */
 export const PrivateRoute = ({ children, ...props }) => {
-    const { user } = useAuth();
+    const { user, hasCheckedLocal } = useAuth();
 
-    return (
-        <Route
-            {...props}
-            render={({ location }) =>
-                user ? (
-                    children
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: '/signin',
-                            state: { from: location }
-                        }}
-                    />
-                )
-            }
-        />
-    );
+    if (hasCheckedLocal) {
+        return (
+            <Route
+                {...props}
+                render={({ location }) =>
+                    user ? (
+                        children
+                    ) : (
+                        <Redirect
+                            to={{
+                                pathname: '/signin',
+                                state: { from: location }
+                            }}
+                        />
+                    )
+                }
+            />
+        );
+    } else {
+        return <div></div>;
+    }
 };

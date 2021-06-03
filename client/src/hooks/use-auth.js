@@ -21,6 +21,7 @@ export const useAuth = () => {
  */
 export const Provider = ({ children }) => {
     const [user, setUser] = useState();
+    const [hasCheckedLocal, setHasCheckedLocal] = useState(false);
     const { handler } = useErrorHandler();
 
     /**
@@ -69,13 +70,19 @@ export const Provider = ({ children }) => {
      */
     const loadUserFromStorage = () => {
         const auth = JSON.parse(localStorage.getItem('@course:auth'));
-
         setUser(auth);
+        setHasCheckedLocal(true);
     };
 
     return (
         <Context.Provider
-            value={{ user, signIn, signOut, loadUserFromStorage }}
+            value={{
+                user,
+                signIn,
+                signOut,
+                loadUserFromStorage,
+                hasCheckedLocal
+            }}
         >
             {children}
         </Context.Provider>

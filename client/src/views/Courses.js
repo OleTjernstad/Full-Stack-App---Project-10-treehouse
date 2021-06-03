@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { server } from '../api/server';
+import { getAllCourses } from '../api/server';
 import { useAsyncLoader } from '../hooks/use-async-loader';
 import { useState } from 'react';
 
@@ -13,7 +13,7 @@ export const Courses = () => {
     /**
      * load all courses from api
      */
-    useAsyncLoader(true, server.get('api/courses'), (data, status) => {
+    useAsyncLoader(getAllCourses(), (data, status) => {
         if (status === 200) {
             setCourses(data.courses);
         }

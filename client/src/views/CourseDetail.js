@@ -1,6 +1,6 @@
 import { ActionBar, Description, Detail } from '../components/course-details';
 
-import { server } from '../api/server';
+import { getCourseById } from '../api/server';
 import { useAsyncLoader } from '../hooks/use-async-loader';
 import { useParams } from 'react-router';
 import { useState } from 'react';
@@ -16,7 +16,7 @@ export const CourseDetails = () => {
     /**
      * Load course by id from api
      */
-    useAsyncLoader(id, server.get(`api/courses/${id}`), (data, status) => {
+    useAsyncLoader(getCourseById(id), (data, status) => {
         if (status === 200) {
             setCourse(data.course);
         }
