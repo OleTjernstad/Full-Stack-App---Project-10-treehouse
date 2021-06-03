@@ -20,7 +20,7 @@ export const useAuth = () => {
  * @returns
  */
 export const Provider = ({ children }) => {
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(undefined);
     const [hasCheckedLocal, setHasCheckedLocal] = useState(false);
     const { handler } = useErrorHandler();
 
@@ -43,7 +43,7 @@ export const Provider = ({ children }) => {
             });
 
             if (status === 200) {
-                setUser(data.user);
+                setUser({ ...data.user, password: password });
                 setHasCheckedLocal(true);
                 localStorage.setItem(
                     '@course:auth',
