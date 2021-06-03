@@ -44,6 +44,7 @@ export const Provider = ({ children }) => {
 
             if (status === 200) {
                 setUser(data.user);
+                setHasCheckedLocal(true);
                 localStorage.setItem(
                     '@course:auth',
                     JSON.stringify({ ...data.user, password: password })
