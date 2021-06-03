@@ -6,18 +6,18 @@ import {
 } from 'react-router-dom';
 
 import { Provider as AuthProvider } from './hooks/use-auth';
-import { CourseDetails } from './views/course-detail';
-import { Courses } from './views/courses';
-import { CreateCourse } from './views/create-course';
-import { Forbidden } from './views/forbidden';
-import { Header } from './layout/header';
-import { NotFound } from './views/not-found';
-import { PrivateRoute } from './routes/privateRoute';
-import { UnhandledError } from './views/unhandled-error';
-import { UpdateCourse } from './views/update-course';
-import { UserSignOut } from './views/user-sign-out';
-import { UserSignUp } from './views/user-sign-up';
-import { UserSignin } from './views/user-signIn';
+import { CourseDetails } from './views/CourseDetail';
+import { Courses } from './views/Courses';
+import { CreateCourse } from './views/CreateCourse';
+import { Forbidden } from './views/Forbidden';
+import { Header } from './layout/Header';
+import { NotFound } from './views/NotFound';
+import { PrivateRoute } from './routes/PrivateRoute';
+import { UnhandledError } from './views/UnhandledError';
+import { UpdateCourse } from './views/UpdateCourse';
+import { UserSignOut } from './views/UserSignOut';
+import { UserSignUp } from './views/UserSignUp';
+import { UserSignin } from './views/UserSignIn';
 
 /**
  * Render app and routes
