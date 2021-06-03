@@ -1,11 +1,12 @@
 import { CourseForm, initialState, reducer } from '../components/course-form';
-import { useEffect, useReducer } from 'react';
 import { useHistory, useParams } from 'react-router';
 
 import { Link } from 'react-router-dom';
 import { server } from '../api/server';
+import { useAsyncLoader } from '../hooks/use-async-loader';
 import { useAuth } from '../hooks/use-auth';
 import { useErrorHandler } from '../hooks/use-error-handler';
+import { useReducer } from 'react';
 
 /**
  * Render Update course page
@@ -24,23 +25,14 @@ export const UpdateCourse = () => {
     /**
      * Load course details by id from api
      */
-    useEffect(() => {
-        const get = async () => {
-            try {
-                const { status, data } = await server.get(`api/courses/${id}`);
-                if (status === 200) {
-                    if (user.id !== data.course.User.id) {
-                        history.replace('forbidden');
-                    }
-                    dispatch({ type: 'setCourse', payload: data.course });
-                }
-            } catch (error) {
-                handler(error);
+    useAsyncLoader(id, server.get(`api/courses/${id}`), (data, status) => {
+        if (status === 200) {
+            if (user.id !== data.course.User.id) {
+                history.replace('forbidden');
             }
-        };
-        get();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id]);
+            dispatch({ type: 'setCourse', payload: data.course });
+        }
+    });
 
     /**
      * Submit the updated course to the api

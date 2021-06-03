@@ -1,9 +1,9 @@
 import { ActionBar, Description, Detail } from '../components/course-details';
-import { useEffect, useState } from 'react';
 
 import { server } from '../api/server';
-import { useErrorHandler } from '../hooks/use-error-handler';
+import { useAsyncLoader } from '../hooks/use-async-loader';
 import { useParams } from 'react-router';
+import { useState } from 'react';
 
 /**
  * Render page with course details
@@ -13,25 +13,14 @@ export const CourseDetails = () => {
     const { id } = useParams();
     const [course, setCourse] = useState();
 
-    const { handler } = useErrorHandler();
-
     /**
      * Load course by id from api
      */
-    useEffect(() => {
-        const get = async () => {
-            try {
-                const { status, data } = await server.get(`api/courses/${id}`);
-                if (status === 200) {
-                    setCourse(data.course);
-                }
-            } catch (error) {
-                handler(error);
-            }
-        };
-        get();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id]);
+    useAsyncLoader(id, server.get(`api/courses/${id}`), (data, status) => {
+        if (status === 200) {
+            setCourse(data.course);
+        }
+    });
 
     return (
         <main>

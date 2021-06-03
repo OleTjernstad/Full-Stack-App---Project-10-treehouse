@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-
 import { Link } from 'react-router-dom';
 import { server } from '../api/server';
-import { useErrorHandler } from '../hooks/use-error-handler';
+import { useAsyncLoader } from '../hooks/use-async-loader';
+import { useState } from 'react';
 
 /**
  * Render course list and create course button
@@ -10,26 +9,15 @@ import { useErrorHandler } from '../hooks/use-error-handler';
  */
 export const Courses = () => {
     const [courses, setCourses] = useState([]);
-    const { handler } = useErrorHandler();
 
     /**
      * load all courses from api
      */
-    useEffect(() => {
-        const get = async () => {
-            try {
-                const { data, status } = await server.get('api/courses');
-
-                if (status === 200) {
-                    setCourses(data.courses);
-                }
-            } catch (error) {
-                handler(error);
-            }
-        };
-        get();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    useAsyncLoader(true, server.get('api/courses'), (data, status) => {
+        if (status === 200) {
+            setCourses(data.courses);
+        }
+    });
 
     return (
         <main>

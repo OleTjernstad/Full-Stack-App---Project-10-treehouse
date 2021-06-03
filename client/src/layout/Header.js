@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
-import { useEffect } from 'react';
+import { useEffectOnce } from '../hooks/use-effect-once';
 
 /**
  * Render the Page header, Show header buttons based on logged in status, call loadUserFromStorage on reload
@@ -10,12 +10,11 @@ import { useEffect } from 'react';
 export const Header = () => {
     const { user, loadUserFromStorage } = useAuth();
 
-    useEffect(() => {
+    useEffectOnce(() => {
         if (!user) {
             loadUserFromStorage();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    });
 
     return (
         <header>
