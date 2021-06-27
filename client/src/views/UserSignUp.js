@@ -1,6 +1,7 @@
 import { Link, useHistory } from 'react-router-dom';
 
 import { server } from '../api/server';
+import { useAuth } from '../hooks/use-auth';
 import { useErrorHandler } from '../hooks/use-error-handler';
 import { useRef } from 'react';
 
@@ -10,6 +11,7 @@ import { useRef } from 'react';
  */
 export const UserSignUp = () => {
     const history = useHistory();
+    const { signIn } = useAuth();
 
     /**
      * Refs for handling input data
@@ -38,7 +40,14 @@ export const UserSignUp = () => {
                     password: password.current.value
                 });
                 if (status === 201) {
-                    history.replace('/signin');
+                    if (
+                        await signIn(
+                            emailAddress.current.value,
+                            password.current.value
+                        )
+                    ) {
+                        history.replace('/');
+                    }
                 }
             } catch (error) {
                 handler(error);
