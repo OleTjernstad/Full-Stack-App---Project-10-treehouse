@@ -21,8 +21,14 @@ router.post(
     '',
     asyncHandler(async (req, res, next) => {
         let user;
+        const { firstName, lastName, emailAddress, password } = req.body;
         try {
-            user = await User.create(req.body);
+            user = await User.create({
+                firstName,
+                lastName,
+                emailAddress,
+                passwordValidate: password
+            });
             res.location('/');
             res.status(201).end();
         } catch (error) {

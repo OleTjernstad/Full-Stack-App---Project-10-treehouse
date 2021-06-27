@@ -60,17 +60,31 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
                 validate: {
+                    notEmpty: {
+                        msg: 'password is required'
+                    }
+                }
+            },
+            passwordValidate: {
+                type: DataTypes.VIRTUAL,
+                allowNull: false,
+                set: function setPassword(val) {
+                    // trigger validation on "password" field
+                    this.setDataValue('passwordValidate', val);
+
+                    this.setDataValue('password', bcrypt.hashSync(val, 10));
+                },
+                validate: {
                     notNull: {
+                        msg: 'password is required'
+                    },
+                    notEmpty: {
                         msg: 'password is required'
                     },
                     min: {
                         args: 6,
                         msg: 'password must be 6 characters or longer'
                     }
-                },
-                set(val) {
-                    const hashedPassword = bcrypt.hashSync(val, 10);
-                    this.setDataValue('password', hashedPassword);
                 }
             }
         },
